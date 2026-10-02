@@ -1,0 +1,55 @@
+{
+  "name": "contest-layout",
+  "displayName": "Contest Layout",
+  "description": "Contest layout setup and Java/C++/Python runner for competitive programming",
+  "publisher": "NeetDhameliya",
+  "version": "0.0.3",
+  "categories": [
+    "Other"
+  ],
+  "keywords": [
+    "competitive",
+    "programming",
+    "java",
+    "cpp",
+    "python",
+    "contest",
+    "layout",
+    "codeforces",
+    "atcoder",
+    "competitive programming",
+    "runner"
+  ],
+  "engines": {
+    "vscode": "^1.103.0"
+  },
+  "main": "./out/extension.js",
+  "activationEvents": [
+    "onCommand:contestLayout.openContestFiles",
+    "onCommand:contestLayout.runFile"
+  ],
+  "contributes": {
+    "commands": [
+      {
+        "command": "contestLayout.openContestFiles",
+        "title": "Neet: Set Contest Layout"
+      },
+      {
+        "command": "contestLayout.runFile",
+        "title": "Neet: Run Java, C++, or Python File"
+      }
+    ],
+    "keybindings": [
+      {
+        "command": "contestLayout.runFile",
+        "key": "shift+enter",
+        "when": "editorTextFocus"
+      }
+    ]
+  },
+  "devDependencies": {
+    "@types/node": "^24.3.1",
+    "@types/vscode": "^1.103.0",
+    "typescript": "^5.9.2"
+  }
+}

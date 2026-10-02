@@ -1,0 +1,72 @@
+correct
+1 apti protogonist antagonist	
+2 apti figure front view top view
+2 apti 3rd best throw
+2 apti h10 - h20
+1 apti tiles
+2 apti teacher student
+1 apti 7/18 dice
+2 apti combinatorics always uses, sometimes uses
+1 TOC L1 intersetions L2 
+1 TOC minimal dfa states
+1 CD context free grammer abab
+1 CD hello 3 statements
+2 CD SDT compare
+1 DBMS super key count
+1 DBMS TRC projection
+1 DBMS decomposition dependency preserving
+1 DBMS FD que
+1 DBMS TLB hit miss
+1 COA N=M+L
+1 COA data hazard RAW
+1 COA load/store
+1 COA addressing modes match the following
+1 OS deadlock free
+1 OS deadlock bankers algo prevents
+2 OS fork print
+1 DL xnor
+1 DL kmap
+1 DL x-y -x+y
+2 DL counter fn
+2 DL IEEE 754 sum
+1 CN sliding window frame size 21
+1 CN congestions 2000 segment	
+1 ALGO O(n2)
+2 C foo baar 2^16
+1 DS Linked list
+1 DS hashing
+2 DS 3rd node can't be 5
+1 DS 60th node in post order 7th
+2 DM 2-color	
+2 DM du<dv<fn
+1 EM 1/3 balls
+
+wrong
+1 CD LL1 backtracking
+2 CD context free grammer a b count
+2 DM vertext cover clique
+1 DM 8 vertice matching (forgot 0)
+2 DM edge inclusion cycle minimum weight
+2 CN network supernet
+1 CN HTTP 1.1
+2 OS avg waiting time
+2 OS disc sector
+1 C print local variable 
+1 DS full binary tree height 23
+1 DS leaf node n-1/2 n-3/2
+2 ALGO p1 p2 shortest path -0.66 
+
+wrong tukke
+1 EM f1 local minima maxima diff
+1 EM c1+c2
+1 EM 0010000 vector EM rank determinant 
+
+left
+1 apti player 
+1 apti student enroll credit
+1 DM row column even 1 
+1 CN TCP connection send same time , half duplex
+2 EM P[X]
+1 EM multiplicity of eigenvalues
+2 COA EX stalls
+2 CD g*k redundancy

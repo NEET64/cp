@@ -1,0 +1,25 @@
+# CPH test cases (absolute paths inside, useless to others)
+.cph/
+
+# local input/output files (some are 10+ MB)
+input.txt
+output.txt
+*.in
+*.out
+
+# compiled binaries
+a.out
+*.exe
+*.o
+*.class
+__pycache__/
+
+# editor settings
+.vscode/
+
+# extension build stuff
+node_modules/
+kit/contest-layout/out/
+
+# OS junk
+.DS_Store

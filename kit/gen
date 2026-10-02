@@ -1,0 +1,44 @@
+#!/usr/bin/env bash
+
+# Find root: script is at ~/Contest/kit/gen, root is ~/Contest
+SCRIPT_DIR="$(dirname "$(readlink -f "$0")")"
+ROOT="$(dirname "$SCRIPT_DIR")"
+TMPL="$SCRIPT_DIR/templates"
+
+# Copy template.<ext> to <folder>/<name>.<ext>; never overwrite an existing file
+new_file() {
+    local name="$1" ext="$2" folder="$3"
+    local file="$folder/$name.$ext"
+    if [ ! -f "$TMPL/template.$ext" ]; then
+        echo "Error: $TMPL/template.$ext not found"; exit 1
+    fi
+    if [ -e "$file" ]; then
+        echo "Error: $file already exists"; exit 1
+    fi
+    mkdir -p "$folder"
+    cp "$TMPL/template.$ext" "$file"
+    # Java class name must match the file name
+    [ "$ext" = java ] && sed -i "s/public class [A-Za-z_][A-Za-z0-9_]*/public class $name/" "$file"
+    echo "$name.$ext created"
+}
+
+# Create contest: A/B/C.cpp + input/output in Contests/<name>, open in VS Code
+contest() {
+    local folder="$ROOT/Contests/$1"
+    new_file A cpp "$folder"
+    new_file B cpp "$folder"
+    new_file C cpp "$folder"
+    touch "$folder/input.txt" "$folder/output.txt"
+    echo "Contest folder '$1' created in Contests/"
+    code "$folder"
+}
+
+# Main
+if [ -z "$2" ]; then
+    echo "Usage: gen <contest|cpp|java|py> <name>"; exit 1
+fi
+case "$1" in
+    contest) contest "$2" ;;
+    cpp|java|py) new_file "$2" "$1" "$PWD" && code "$PWD/$2.$1" ;;
+    *) echo "Usage: gen <contest|cpp|java|py> <name>"; exit 1 ;;
+esac
