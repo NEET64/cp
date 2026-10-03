@@ -1,5 +1,12 @@
 #include <bits/stdc++.h>
 using namespace std;
+
+#ifdef LOCAL
+#include "debug.h"
+#else
+#define debug(...) ((void)0)
+#endif
+
 #define int long long
 
 void solve() {

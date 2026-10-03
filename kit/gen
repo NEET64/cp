@@ -33,12 +33,34 @@ contest() {
     code "$folder"
 }
 
+# Turn every file in snippets/ into a VS Code snippet: type the file name, press Tab
+snippets() {
+    python3 - "$ROOT/snippets" "$HOME/.config/Code/User/snippets/contest.code-snippets" <<'EOF'
+import json, os, sys
+src, out = sys.argv[1], sys.argv[2]
+scope = {".cpp": "cpp", ".py": "python", ".java": "java"}
+data = {}
+for f in sorted(os.listdir(src)):
+    name, ext = os.path.splitext(f)
+    if ext in scope:
+        code = open(os.path.join(src, f)).read().rstrip("\n")
+        code = code.replace("\\", "\\\\").replace("$", "\\$")
+        data[f] = {"prefix": name, "scope": scope[ext], "body": code.split("\n")}
+os.makedirs(os.path.dirname(out), exist_ok=True)
+json.dump(data, open(out, "w"), indent=2)
+print(f"{len(data)} snippets: {', '.join(data)}")
+EOF
+}
+
 # Main
+if [ "$1" = snippets ]; then
+    snippets; exit
+fi
 if [ -z "$2" ]; then
-    echo "Usage: gen <contest|cpp|java|py> <name>"; exit 1
+    echo "Usage: gen <contest|cpp|java|py> <name>  |  gen snippets"; exit 1
 fi
 case "$1" in
     contest) contest "$2" ;;
     cpp|java|py) new_file "$2" "$1" "$PWD" && code "$PWD/$2.$1" ;;
-    *) echo "Usage: gen <contest|cpp|java|py> <name>"; exit 1 ;;
+    *) echo "Usage: gen <contest|cpp|java|py> <name>  |  gen snippets"; exit 1 ;;
 esac

@@ -261,6 +261,10 @@ function warmPrecompiledHeaders() {
     fs.mkdirSync(path.join(job.dir, "bits"), { recursive: true });
     // Written once only: rewriting it while another window's g++ reads it could give an empty PCH.
     if (!fs.existsSync(header)) fs.writeFileSync(header, "#include <bits/stdc++.h>\n");
+    // bits/stdc++.h has no include guard and a PCH works only for the first include,
+    // so a second include must find a real header here: this one forwards to the system one.
+    const stub = path.join(job.dir, "bits", "stdc++.h");
+    if (!fs.existsSync(stub)) fs.writeFileSync(stub, "#include_next <bits/stdc++.h>\n");
     pchBuilding.add(job.dir);
     const done = () => pchBuilding.delete(job.dir);
     spawn("nice", ["-n", "10", "bash", "-c", job.build], { stdio: "ignore" }).on("close", done).on("error", done);
