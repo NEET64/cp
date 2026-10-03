@@ -7,7 +7,7 @@ Contest layout and one-key runner for competitive programming in VS Code. C++, J
 ## What it does
 
 - **Contest layout:** code on top, `input.txt` and `output.txt` side by side below it. Both are locked, so other files you open go to the code side. Use the layout icon in the editor title bar or **Neet: Set Contest Layout**. Missing files are created.
-- **Run with `Shift+Enter`** or the ▶ icon, from the code file, input.txt or output.txt. It saves, compiles and runs. ⏹ stops a run, and a new run stops the old one.
+- **Run with `Shift+Enter`** or the ▶ icon, from the code file, input.txt or output.txt. It saves, compiles and runs in the background: the terminal stays closed, `Ctrl+J` shows the log. ⏹ stops a run, and a new run stops the old one.
 - **Input** comes from input.txt if it exists, else you type it in the terminal. input.txt is live: append lines and save to send more, so interactive problems work too.
 - **Output** goes to output.txt if it exists, else to the terminal. Errors and debug output (stderr) always go to the terminal.
 - **Result line:** compile error, runtime error with exit code, time limit exceeded, or CPU time, real time and memory.
@@ -40,7 +40,3 @@ Contest layout and one-key runner for competitive programming in VS Code. C++, J
 - The program runs in the temp folder, so read stdin, not files by name.
 - Needs bash (Linux, macOS; on Windows use WSL or Git Bash).
 - The precompiled header lives in `~/.cache/contest-layout` (~170 MB) and is rebuilt automatically after a g++ update.
-
-## Develop
-
-Open this folder in VS Code and press `F5`. A window opens on `playground/`, and edits are recompiled automatically.

@@ -224,8 +224,9 @@ async function runFile(uri?: vscode.Uri) {
   );
 
   const runner = runnerTerminal();
-  // Without input.txt the program reads from the terminal, so focus it for typing.
-  runner.show(hasInput);
+  // Runs in the background (Ctrl+J shows the log). Only without input.txt the
+  // program reads from the terminal, so then it is opened and focused for typing.
+  if (!hasInput) runner.show(false);
   runner.sendText(`bash ${quote(script)}`);
   watchRun(doneFile);
 }
