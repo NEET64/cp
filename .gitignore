@@ -8,7 +8,6 @@ output.txt
 *.out
 
 # compiled binaries
-a.out
 *.exe
 *.o
 *.class
