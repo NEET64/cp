@@ -1,9 +1,9 @@
 {
   "name": "contest-layout",
   "displayName": "Contest Layout",
-  "description": "Contest layout setup and Java/C++/Python runner for competitive programming",
+  "description": "Contest layout setup and configurable C++/Java/Python runner for competitive programming",
   "publisher": "NeetDhameliya",
-  "version": "0.0.3",
+  "version": "0.1.0",
   "categories": [
     "Other"
   ],
@@ -25,31 +25,123 @@
   },
   "main": "./out/extension.js",
   "activationEvents": [
-    "onCommand:contestLayout.openContestFiles",
-    "onCommand:contestLayout.runFile"
+    "onStartupFinished"
   ],
   "contributes": {
     "commands": [
       {
         "command": "contestLayout.openContestFiles",
-        "title": "Neet: Set Contest Layout"
+        "title": "Neet: Set Contest Layout",
+        "icon": "$(layout-panel)"
       },
       {
         "command": "contestLayout.runFile",
-        "title": "Neet: Run Java, C++, or Python File"
+        "title": "Neet: Run Java, C++, or Python File",
+        "icon": "$(play)"
+      },
+      {
+        "command": "contestLayout.stopRun",
+        "title": "Neet: Stop Run",
+        "icon": "$(debug-stop)"
+      },
+      {
+        "command": "contestLayout.newFile",
+        "title": "Neet: New File",
+        "icon": "$(add)"
       }
     ],
+    "menus": {
+      "editor/title": [
+        {
+          "command": "contestLayout.runFile",
+          "when": "resourceExtname in contestLayout.runnableExts && !contestLayout.running",
+          "group": "navigation@1"
+        },
+        {
+          "command": "contestLayout.stopRun",
+          "when": "resourceExtname in contestLayout.runnableExts && contestLayout.running",
+          "group": "navigation@1"
+        },
+        {
+          "command": "contestLayout.openContestFiles",
+          "when": "resourceExtname in contestLayout.runnableExts && !contestLayout.layoutReady",
+          "group": "navigation@2"
+        },
+        {
+          "command": "contestLayout.newFile",
+          "when": "resourceExtname in contestLayout.runnableExts",
+          "group": "navigation@3"
+        }
+      ],
+      "commandPalette": [
+        {
+          "command": "contestLayout.stopRun",
+          "when": "contestLayout.running"
+        }
+      ]
+    },
     "keybindings": [
       {
         "command": "contestLayout.runFile",
         "key": "shift+enter",
-        "when": "editorTextFocus"
+        "when": "editorTextFocus && (resourceExtname in contestLayout.runnableExts || resourceFilename in contestLayout.ioFiles)"
       }
-    ]
+    ],
+    "configuration": {
+      "title": "Contest Layout",
+      "properties": {
+        "contestLayout.languages": {
+          "type": "object",
+          "markdownDescription": "Commands per file extension. `{file}` = full path of the source file, `{name}` = file name without extension. Commands run in bash, so things like `timeout 2 ./{name}` or `-I\"$HOME/dir\"` work. `template` (optional) is used by **Neet: New File**. Your entries are merged over the defaults, so you can add a language or change one field only.",
+          "additionalProperties": {
+            "type": "object",
+            "properties": {
+              "compile": {
+                "type": "string"
+              },
+              "run": {
+                "type": "string"
+              },
+              "template": {
+                "type": "string"
+              }
+            }
+          },
+          "default": {
+            "cpp": {
+              "compile": "g++ -std=c++23 -O2 -Wall -DLOCAL {file} -o {name}",
+              "run": "./{name}"
+            },
+            "java": {
+              "compile": "javac -d . {file}",
+              "run": "java {name}"
+            },
+            "py": {
+              "run": "python3 {file}"
+            }
+          }
+        },
+        "contestLayout.inputFile": {
+          "type": "string",
+          "default": "input.txt",
+          "description": "Input file name (in the code file's folder). If it does not exist, input is read from the terminal."
+        },
+        "contestLayout.outputFile": {
+          "type": "string",
+          "default": "output.txt",
+          "description": "Output file name (in the code file's folder). If it does not exist, output goes to the terminal."
+        }
+      }
+    }
+  },
+  "scripts": {
+    "compile": "tsc -p ./",
+    "watch": "tsc -watch -p ./",
+    "vscode:prepublish": "rm -rf out && tsc -p ./"
   },
   "devDependencies": {
     "@types/node": "^24.3.1",
     "@types/vscode": "^1.103.0",
-    "typescript": "^5.9.2"
+    "typescript": "^7.0.2"
   }
 }

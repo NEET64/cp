@@ -14,8 +14,9 @@ a.out
 *.class
 __pycache__/
 
-# editor settings
+# editor settings (but keep the extension's F5 setup)
 .vscode/
+!kit/contest-layout/.vscode/
 
 # extension build stuff
 node_modules/

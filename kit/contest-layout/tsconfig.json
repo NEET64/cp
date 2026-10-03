@@ -1,15 +1,12 @@
 {
   "compilerOptions": {
-    "target": "ES6",
-    "module": "commonjs",
-    "outDir": "out",
+    "module": "node20",
     "rootDir": "src",
+    "outDir": "out",
+    "types": ["node"],
     "strict": true,
-    "noImplicitAny": true,
     "sourceMap": true,
-    "moduleResolution": "node",
-    "esModuleInterop": true,
     "skipLibCheck": true
   },
-  "exclude": ["node_modules", ".vscode-test"]
+  "include": ["src"]
 }
